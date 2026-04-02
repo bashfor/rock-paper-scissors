@@ -12,8 +12,51 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let humanChoice = prompt("Enter your choice:");
+    //make it case insensitive
+    humanChoice = humanChoice[0].toUpperCase() + humanChoice.slice(1, humanChoice.length).toLowerCase();
 
     return humanChoice;
 }
 
-console.log(getHumanChoice());
+let humanScore = 0;
+let computerScore = 0;
+
+function playRound(humanChoice, computerChoice) {
+    switch (true) {
+        case (humanChoice === "Paper" && computerChoice === "Rock"):
+            humanScore++;
+            break;
+        case (humanChoice === "Rock" && computerChoice === "Paper"):
+            computerScore++;
+            break;
+
+        case (humanChoice === "Scissors" && computerChoice === "Paper"):
+            humanScore++;
+            break;
+        case (humanChoice === "Paper" && computerChoice === "Scissors"):
+            computerScore++;
+            break;
+
+        case (humanChoice === "Rock" && computerChoice === "Scissors"):
+            humanScore++;
+            break;
+        case (humanChoice === "Scissors" && computerChoice === "Rock"):
+            computerScore++;
+            break;
+    }
+
+    if (computerScore > humanScore) {
+        console.log(`You lost! ${computerChoice} beats ${humanChoice}`);
+    } else if (humanScore > computerScore) {
+        console.log(`You won! ${humanChoice} beats ${computerChoice}`);
+    } else {
+        console.log("Draw!");
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+
+console.log(humanScore, computerScore);
